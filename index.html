@@ -1485,11 +1485,11 @@ function send() {
   console.log(string_data)
    
   let token;
-  fetch("http://192.168.0.172:5001/token")
+  fetch("https://user-account-autumn-ambrosia.onrender.com/token")
   .then(response => response.json())
   .then(data => {
     token = data.token; 
-    return fetch(`http://192.168.0.172:5001/submit_order?token=${token}`, {
+    return fetch(`https://user-account-autumn-ambrosia.onrender.com/submit_order?token=${token}`, {
       method: "POST",
       headers: {
          "Content-Type": "application/json"
@@ -1500,7 +1500,7 @@ function send() {
     .then(response => response.json())
     .then(data => {
       if (data.message == "success") {
-        window.location.href = `http://192.168.0.172:5001/confirm?token=${token}`;
+        window.location.href = `https://user-account-autumn-ambrosia.onrender.com/confirm?token=${token}`;
       } else {
         alert(`Error: ${data.error}`)
       }
