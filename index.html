@@ -308,6 +308,7 @@
 
     #cart_link {
       float: right;
+      margin-right: 30px;
     }
 
     .order_images {
@@ -556,6 +557,7 @@
   color: white;
   border: 2px white;
   border-radius: 12px;
+  margin-left: 20px;
 }
 #place_order:hover {
   background-color: green;
@@ -1058,17 +1060,9 @@ img {vertical-align: middle;}
          <input type="text" class="create_input" id="create_name" required>
         </div>
         <div>
-         <h4>If you are the Taylor Puchong students, please choose the class or put "other".</h4>
+         <h4>If you are the Taylor Puchong students, please provide your class or put "other".</h4>
          <h4 class="create_h4">Class:</h4>
          <input type="text" class="create_input" id="create_class" required>
-        </div>
-        <div>
-         <h4 class="create_h4">Email: </h4>
-         <input type="email" class="create_input" id="create_email" required>
-        </div>
-        <div>
-         <h4 class="create_h4">Phone number:</h4>
-         <input type="tel" class="create_input" id="create_phone">
         </div>
         <button id="create_button" type="button" onclick="get_user();">Log in</button>
   </fieldset>
@@ -1511,63 +1505,13 @@ function send() {
     });
   }
   
-/*
-//send
-function send() {
-  var order = document.getElementsByClassName("selected_items");
-    let order_checked = [];
-    for (i=0; i<order.length; i++) {
-      if (order[i].checked) {
-        order_checked.push(order[i].value);
-      } else {
-        //skip
-    }
-  }
-
-  order_list_items = []
-  order_checked.forEach(value => {
-    x = db.exec(`SELECT name, quantity, topping FROM cart WHERE id= ${value}`)
-    x = x[0].values[0];
-    console.log(x);
-    order_list_items.push(x);
-  })
-
-  if (order_checked.length === 0) {
-    alert("Please select an item");
-    return;
-  }
-  let user = localStorage.getItem("user");
-  var string_data = {order_items: order_list_items, username: user}
-
-  console.log(string_data)
-
-  fetch("https://user-account-autumn-ambrosia.onrender.com",{
-    method: "POST",
-    headers: {
-    "Content-Type": "application/json"
-    },
-    credentials: "include",
-    body: JSON.stringify(string_data)
-  })
-  .then(response => {
-    return response.text();  // Or .json() if your Flask route returns JSON
-  })
-  .then(data => {
-    console.log("Server response:", data);
-    // Now safe to redirect after session is stored
-    window.location.href = "https://user-account-autumn-ambrosia.onrender.com/confirm";
-  })
- }
-  */
-
+  
   function get_user() {
       const name = document.getElementById("create_name").value.trim();
       var userclass = document.getElementById("create_class").value;
-      var email = document.getElementById("create_email").value;
-      var phone = document.getElementById("create_phone").value;
       
-      if (name == null || name === "" || userclass === ""|| userclass === null|| email === "" || email == null) {
-         alert("Please provide your name, class, and email.");
+      if (name == null || name === "" || userclass === ""|| userclass === null) {
+         alert("Please provide your name and class.");
          navigation = "create";
          navigate();
          return;
@@ -1575,8 +1519,6 @@ function send() {
      
         localStorage.setItem("user", name);
         localStorage.setItem("user_class", userclass);
-        localStorage.setItem("user_email", email);
-        localStorage.setItem("user_phone", phone);
      
         const user = localStorage.getItem("user");
      
