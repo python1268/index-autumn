@@ -1286,6 +1286,7 @@ function add_one(id) {
 
 
 function add_to_cart() {
+ try {
   var name_item = document.getElementById("add_to_chosen_tilte").innerText;
   var quantity_item = Number(document.getElementById("add_to_cart_quantit").innerText);
   var topping_item = document.getElementById("topping_selection").value;
@@ -1323,6 +1324,7 @@ function add_to_cart() {
       );
 
       found = true;
+      alert("Added to cart!");
       break; // no need to continue looping
     }
   }
@@ -1332,6 +1334,11 @@ function add_to_cart() {
       "INSERT INTO cart (name, quantity, total_price, topping, url) VALUES (?, ?, ?, ?, ?);",
       [name_item, quantity_item, totalprice, topping_item, url]
     );
+    alert("Added to cart!");
+  }
+ } catch(err) {
+      alert("Couldn't add to cart");
+      console.error(err.message);
   }
 }
 
