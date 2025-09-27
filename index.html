@@ -1282,7 +1282,7 @@ function add_one(id) {
       </div>
          `
        });
-       document.getElementById("cart_inner").innerHTML += `<button id="place_order" onclick="send()">Place order</button>`;
+       document.getElementById("cart_inner").innerHTML += `<button id="place_order" onclick="send(this)">Place order</button>`;
      }
 
 
@@ -1503,7 +1503,8 @@ function add_cart(name,price,image,topping) {
 
 
 //send
-function send() {
+function send(button) {
+  button.disabled = true;
   var order = document.getElementsByClassName("selected_items");
     let order_checked = [];
     for (i=0; i<order.length; i++) {
@@ -1555,6 +1556,9 @@ function send() {
     .catch(err => {
       console.error("Error:", err);
       alert("Something went wrong, please try again.");
+    });
+    .finally(() => {
+      button.disabled = false; 
     });
   }
   
