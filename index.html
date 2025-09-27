@@ -857,6 +857,22 @@ img {vertical-align: middle;}
        width: 300px;
        height: 300px;
      }
+    
+      #no_internet_screen {
+       display: none;
+    }
+
+    #order_page {
+      display: none;
+    }
+
+    #about_page {
+        display: none;
+    }
+
+    #add_to_cart_page {
+       display: none;
+    }
   </style>
 </head>
 <body>
@@ -1282,53 +1298,44 @@ function add_to_cart() {
   per_item_price = take_price = Number(take_price[1]);
 
   var totalprice = per_item_price * quantity_item;
+  var add_price_topping = check_topping(topping_item, quantity_item);
+  totalprice = totalprice + add_price_topping;
+
+  var url = document.getElementById("add_to_cart_item").src;
 
   var result = db.exec("SELECT * FROM cart");
-  var cart_items = [];
+  var cart_items = result.length > 0 ? result[0].values : [];
 
-  if (result.length > 0) {
-    cart_items = result[0].values;
-  }
+  // Flag to track if we found a matching item
+  let found = false;
 
-  if (cart_items.length === 0) {
-    // cart empty → always insert first item
-    var url = document.getElementById("add_to_cart_item").src;
-    var add_price_topping = check_topping(topping_item, quantity_item);
-    totalprice = totalprice + add_price_topping;
-
-    db.run(
-      "INSERT INTO cart (name,quantity,total_price,topping,url) VALUES (?,?,?,?,?);",
-      [name_item, quantity_item, totalprice, topping_item, url]
-    );
-    return; 
-  }
-
-  // if cart already has items → run normal update/insert logic
-  cart_items.forEach(row => {
+  for (let i = 0; i < cart_items.length; i++) {
+    var row = cart_items[i];
     var name = row[1];
     var quantity = row[2];
     var total_price = row[3];
     var topping = row[4];
 
-    if (name == name_item && topping == topping_item) {
+    if (name === name_item && topping === topping_item) {
       var total_quantity = quantity_item + quantity;
-      total_price = total_price + totalprice;
+      var new_total_price = total_price + totalprice;
 
       db.run(
-        "UPDATE cart SET quantity = ?, total_price=? WHERE name= ? AND topping = ?",
-        [total_quantity, total_price, name_item, topping_item]
+        "UPDATE cart SET quantity = ?, total_price = ? WHERE name = ? AND topping = ?",
+        [total_quantity, new_total_price, name_item, topping_item]
       );
-    } else {
-      var url = document.getElementById("add_to_cart_item").src;
-      var add_price_topping = check_topping(topping_item, quantity_item);
-      totalprice = totalprice + add_price_topping;
 
-      db.run(
-        "INSERT INTO cart (name,quantity,total_price,topping,url) VALUES (?,?,?,?,?);",
-        [name_item, quantity_item, totalprice, topping_item, url]
-      );
+      found = true;
+      break; // no need to continue looping
     }
-  });
+  }
+
+  if (!found) {
+    db.run(
+      "INSERT INTO cart (name, quantity, total_price, topping, url) VALUES (?, ?, ?, ?, ?);",
+      [name_item, quantity_item, totalprice, topping_item, url]
+    );
+  }
 }
 
 
