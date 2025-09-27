@@ -1271,20 +1271,66 @@ function add_one(id) {
 
 
 
-  function add_to_cart() {
-    var name_item = document.getElementById("add_to_chosen_tilte").innerText;
-    var quantity_item = Number(document.getElementById("add_to_cart_quantit").innerText);
-    var topping_item = document.getElementById("topping_selection").value;
-    var per_item_price = document.getElementById("price_per").innerText;
-    var take_price = per_item_price.trim().split("RM");
-    per_item_price = take_price = Number(take_price[1]);
-    var totalprice = per_item_price * quantity_item;
+
+function add_to_cart() {
+  var name_item = document.getElementById("add_to_chosen_tilte").innerText;
+  var quantity_item = Number(document.getElementById("add_to_cart_quantit").innerText);
+  var topping_item = document.getElementById("topping_selection").value;
+  var per_item_price = document.getElementById("price_per").innerText;
+
+  var take_price = per_item_price.trim().split("RM");
+  per_item_price = take_price = Number(take_price[1]);
+
+  var totalprice = per_item_price * quantity_item;
+
+  var result = db.exec("SELECT * FROM cart");
+  var cart_items = [];
+
+  if (result.length > 0) {
+    cart_items = result[0].values;
+  }
+
+  if (cart_items.length === 0) {
+    // cart empty → always insert first item
     var url = document.getElementById("add_to_cart_item").src;
     var add_price_topping = check_topping(topping_item, quantity_item);
     totalprice = totalprice + add_price_topping;
-    db.run("INSERT INTO cart (name,quantity,total_price,topping,url) VALUES (?,?,?,?,?);",[name_item,quantity_item,totalprice,topping_item,url]);
-    alert("Successfully added item to your database!");
+
+    db.run(
+      "INSERT INTO cart (name,quantity,total_price,topping,url) VALUES (?,?,?,?,?);",
+      [name_item, quantity_item, totalprice, topping_item, url]
+    );
+    return; 
   }
+
+  // if cart already has items → run normal update/insert logic
+  cart_items.forEach(row => {
+    var name = row[1];
+    var quantity = row[2];
+    var total_price = row[3];
+    var topping = row[4];
+
+    if (name == name_item && topping == topping_item) {
+      var total_quantity = quantity_item + quantity;
+      total_price = total_price + totalprice;
+
+      db.run(
+        "UPDATE cart SET quantity = ?, total_price=? WHERE name= ? AND topping = ?",
+        [total_quantity, total_price, name_item, topping_item]
+      );
+    } else {
+      var url = document.getElementById("add_to_cart_item").src;
+      var add_price_topping = check_topping(topping_item, quantity_item);
+      totalprice = totalprice + add_price_topping;
+
+      db.run(
+        "INSERT INTO cart (name,quantity,total_price,topping,url) VALUES (?,?,?,?,?);",
+        [name_item, quantity_item, totalprice, topping_item, url]
+      );
+    }
+  });
+}
+
 
   function delete_cart(id_delete) {
     if (confirm("Are you sure? \n After you have clicked you cannot undo.")) {
