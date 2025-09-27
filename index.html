@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    #create_screen {
+      display: none;
+    }
    #no_internet_screen {
        display: none;
     }
@@ -1112,7 +1115,6 @@ img {vertical-align: middle;}
   let navigation;
   var homepage = document.getElementById("homepage");
   var order_page = document.getElementById("order_page");
-  var menu_preview = document.getElementById("menu_preview");
   var order_chosen = document.getElementById("add_to_cart_page");
   var cart_page = document.getElementById("cart_page");
   var about_page = document.getElementById("about_page");
@@ -1150,11 +1152,6 @@ img {vertical-align: middle;}
   function cart() {
     hideAllScreens();
     cart_page.style.display = "block";
-  }
-
-  function menu_preview_f() {
-    hideAllScreens();
-    menu_preview.style.display = "block";
   }
 
 function about() {
@@ -1409,7 +1406,7 @@ function drinks() {
   return fetch(url)
   .then(response => response.json())
   .then(data => data.values)
-  .catch(err => {console.log(err); return [];})
+  .catch(err => {console.log(err); return []; document.getElementById("drink_menu").innerHTML ="<h2>Couldn't retrieve products' details. Please reload the app again.</h2>"})
  }
 
 
