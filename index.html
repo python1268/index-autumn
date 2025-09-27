@@ -5,6 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+   #no_internet_screen {
+       display: none;
+    }
+
+    #order_page {
+      display: none;
+    }
+
+    #about_page {
+        display: none;
+    }
+
+    #add_to_cart_page {
+       display: none;
+    }
+    
    /* Homepage */
     #hamburger_radio:checked ~ #hamburger_container #hamburger_group {
       display: block;
@@ -857,22 +873,6 @@ img {vertical-align: middle;}
        width: 300px;
        height: 300px;
      }
-    
-      #no_internet_screen {
-       display: none;
-    }
-
-    #order_page {
-      display: none;
-    }
-
-    #about_page {
-        display: none;
-    }
-
-    #add_to_cart_page {
-       display: none;
-    }
   </style>
 </head>
 <body>
@@ -948,7 +948,7 @@ img {vertical-align: middle;}
   <br>
 
   <div id="find">
-    <img id="logo_autumn" src="https://i.ibb.co/yFpXyxP3/Black-White-Flat-Illustrative-Floral-Design-Logo-2-removebg-preview.png">
+    <img id="logo_autumn" src="https://i.ibb.co/yFpXyxP3/Black-White-Flat-Illustrative-Floral-Design-Logo-2-removebg-preview.png" onerror="this.onerror=null; this.src='';>
     <h2 id="welcome">Hello, what would you like to search today?</h2>
 
     <button id="find_food2" onclick="navigation='order';navigate()">Order Now</button>
@@ -988,7 +988,7 @@ img {vertical-align: middle;}
   <!--Cart page-->
     <div id="cart_page">
     <ul id="cart_navigation_bar">
-            <li class="cart_navigation_item"><img id="cart_arrow_back" src="https://png.pngtree.com/png-vector/20220623/ourmid/pngtree-back-arrow-backward-direction-previous-png-image_5198415.png" onclick="navigation='home';navigate()"></li>
+            <li class="cart_navigation_item"><img id="cart_arrow_back" src="https://png.pngtree.com/png-vector/20220623/ourmid/pngtree-back-arrow-backward-direction-previous-png-image_5198415.png" onerror="this.onerror=null; this.src=''; onclick="navigation='home';navigate()"></li>
             <li id="cart_navigation_back" class="cart_navigation_item">Back</li>
             </ul>
       <div id="cart_inner"></div>
@@ -1050,19 +1050,19 @@ img {vertical-align: middle;}
        <p id="here_are">Here are some of our famous drinks.</p>
    </div>
         <div class="each_person">
-            <img src="https://i.ibb.co/MyQ7Sbbd/img1.png" class="image_about" alt="image">
+            <img src="https://i.ibb.co/MyQ7Sbbd/img1.png" class="image_about" alt="image" onerror="this.onerror=null; this.src='https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%204.jpeg?updatedAt=1754308163899';">
             <h3 class="name_each_person">Lychee Sensation</h3>
         </div>
          <div class="each_person">
-            <img src="https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%204.jpeg?updatedAt=1754308163899" class="image_about" alt="image">
+            <img src="https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%204.jpeg?updatedAt=1754308163899" class="image_about" alt="image" onerror="this.onerror=null; this.src='https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%204.jpeg?updatedAt=1754308163899';">
             <h3 class="name_each_person">Choko Deez Nuts</h3>
         </div>
         <div class="each_person">
-            <img src="https://ik.imagekit.io/jasonooi/Add%20a%20heading.jpeg?updatedAt=1754308163956" class="image_about" alt="image">
+            <img src="https://ik.imagekit.io/jasonooi/Add%20a%20heading.jpeg?updatedAt=1754308163956" class="image_about" alt="image" onerror="this.onerror=null; this.src='https://ik.imagekit.io/jasonooi/Add%20a%20heading.jpeg?updatedAt=1754308163956';">
             <h3 class="name_each_person">Spooky Choc</h3>
         </div>
         <div class="each_person">
-            <img src="https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%209.jpeg?updatedAt=1754308163882" class="image_about" alt="image">
+            <img src="https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%209.jpeg?updatedAt=1754308163882" class="image_about" alt="image" onerror="this.onerror=null; this.src='https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%209.jpeg?updatedAt=1754308163882';">
             <h3 class="name_each_person">Boba Tea</h3>
         </div>
         </div>
