@@ -1556,7 +1556,7 @@ function send(button) {
     .catch(err => {
       console.error("Error:", err);
       alert("Something went wrong, please try again.");
-    });
+    })
     .finally(() => {
       button.disabled = false; 
     });
