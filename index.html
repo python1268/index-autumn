@@ -1429,11 +1429,11 @@ function add_to_cart() {
 
   // Drinks
 function drinks() {
-  const apiKey = "AIzaSyDWNrk5Y3tlT7g1xAs157Pd77-oLMmOw0M";
+  const apiKey = ["AIzaSyDWNrk5Y3tlT7g1xAs157Pd77-oLMmOw0M","AIzaSyDovSVgpRkJ3od511umMilPQbbT5wM3dcE"];
   const spreadsheetId = "1-VKCQfq0YvXrXWmcz6omL8aTF_0BARiF0zUlET_brXQ";
   const range = "Sheet1"; // Change this range as needed
 
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey[Math.floor(Math.random() * apiKey.length)]}`;
 
   console.log(url);
   console.log("Running drinks");
