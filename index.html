@@ -1102,7 +1102,7 @@ img {vertical-align: middle;}
   });
 
   window.addEventListener("unload" , function() {
-    
+    save_cartdata();
   })
 
   window.addEventListener("load", function() {
@@ -1199,6 +1199,17 @@ function about() {
     }
  }
 
+function save_cartdata() {
+  try {
+    const data = db.export(); // Uint8Array
+    const arr = Array.from(data); 
+    localStorage.setItem("saved_database", JSON.stringify(arr));
+    console.log("Cart saved to localStorage");
+  } catch (err) {
+    console.error("Error saving cart:", err);
+  }
+}
+
 function add_one(id) {
     var final_number = String(parseInt(document.getElementById(id).innerText) + 1);
     document.getElementById(id).innerText = final_number;
@@ -1208,6 +1219,7 @@ function add_one(id) {
     var change = check(update_l[0][0],update_l[0][1]);
     var update = Number(update_l[0][2]) + change;
     update_quantity(final_number, update, id);
+    save_cartdata();
   }
 
   function minus_one(id) {
@@ -1230,6 +1242,7 @@ function add_one(id) {
     } else {
       update_quantity(final_number, 0, id);
     }
+    save_cartdata();
   }
 
      function delete_dropdown() {
@@ -1340,6 +1353,7 @@ function add_to_cart() {
       alert("Couldn't add to cart");
       console.error(err.message);
   }
+  save_cartdata();
 }
 
 
@@ -1348,9 +1362,8 @@ function add_to_cart() {
        id_delete = Number(id_delete)
        db.run('DELETE FROM cart WHERE id = ?',[id_delete]);
        cartpage()
-    } else {
-      //skip
     }
+    save_cartdata();
   }
  
   function update_quantity(new_quantity, update_price, id) {
@@ -1358,6 +1371,7 @@ function add_to_cart() {
       id = Number(id);
       new_quantity = Number(new_quantity)
       db.run("UPDATE cart SET quantity = ? ,total_price = ? WHERE id= ?",[new_quantity,update_price,id]);
+      save_cartdata();
       cartpage();
     } catch(err) {
       alert(err.message);
@@ -1509,6 +1523,7 @@ function add_cart(name,price,image,topping) {
 //send
 function send(button) {
   button.disabled = true;
+  alert("We will be redirecting you to another site to view your final order.");
   var order = document.getElementsByClassName("selected_items");
     let order_checked = [];
     for (i=0; i<order.length; i++) {
@@ -1590,7 +1605,7 @@ function send(button) {
            navigation = "home";
            console.log("running");
            navigate();
-           alert("Running");
+           alert("Welcome to Autumn's Ambrosia");
        }
          catch (err) {
            alert(`Error: ${err.message}`);
