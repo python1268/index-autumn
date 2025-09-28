@@ -1462,10 +1462,10 @@ function render_images() {
 
 // Topping
 function topping_info() {
-  const apiKey = "AIzaSyDWNrk5Y3tlT7g1xAs157Pd77-oLMmOw0M";
+  const apiKey = ["AIzaSyDWNrk5Y3tlT7g1xAs157Pd77-oLMmOw0M","AIzaSyDovSVgpRkJ3od511umMilPQbbT5wM3dcE"];
   const spreadsheetId = "1-VKCQfq0YvXrXWmcz6omL8aTF_0BARiF0zUlET_brXQ";
   const range = "Sheet2";
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey[Math.floor(Math.random() * apiKey.length)]}`;
   return fetch(url)
   .then(response => response.json())
   .then(data => data.values)
