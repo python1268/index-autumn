@@ -1555,6 +1555,7 @@ function add_cart(name,price,image,topping) {
 function send(button) {
   button.disabled = true;
   alert("We will be redirecting you to another site to view your final order.");
+  var order_links = ["https://autumns-ambrosia-order1.onrender.com", "https://autumns-ambrosia-order2.onrender.com"]
   var order = document.getElementsByClassName("selected_items");
     let order_checked = [];
     for (i=0; i<order.length; i++) {
@@ -1583,11 +1584,12 @@ function send(button) {
   console.log(string_data)
    
   let token;
-  fetch("https://user-account-autumn-ambrosia.onrender.com/token")
+  let link_chosen = order_links[Math.floor(Math.random() * order_links.length)]
+  fetch(`${link_chosen}/token`)
   .then(response => response.json())
   .then(data => {
     token = data.token; 
-    return fetch(`https://user-account-autumn-ambrosia.onrender.com/submit_order?token=${token}`, {
+    return fetch(`${link_chosen}/submit_order?token=${token}`, {
       method: "POST",
       headers: {
          "Content-Type": "application/json"
@@ -1598,7 +1600,7 @@ function send(button) {
     .then(response => response.json())
     .then(data => {
       if (data.message == "success") {
-        window.location.href = `https://user-account-autumn-ambrosia.onrender.com/confirm?token=${token}`;
+        window.location.href = `${link_chosen}/confirm?token=${token}`;
       } else {
         alert(`Error: ${data.error}`)
       }
@@ -1631,7 +1633,7 @@ function send(button) {
      
        if (user != null) {
           try {
-           document.getElementById("welcome").innerHTML = `Hello ${user}, what would you like to search today?`;
+           document.getElementById("welcome").innerHTML = `Hello ${user}, what would you like to order today?`;
            console.log("running");
            navigation = "home";
            console.log("running");
@@ -1655,7 +1657,7 @@ function check_if_got_user() {
   console.log(user);
   if (user != null) {
      try {
-      document.getElementById("welcome").innerHTML = `Hello ${user}, what would you like to search today?`;
+      document.getElementById("welcome").innerHTML = `Hello ${user}, what would you like to order today?`;
       console.log("running");
       navigation = "home";
       console.log("running");
