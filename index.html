@@ -1646,7 +1646,13 @@ function send(button) {
       button.disabled = false; 
     });
   }
-  
+
+function splash() {
+   // Wait 3 seconds, then hide splash screen
+  setTimeout(() => {
+    document.querySelector('.splash-screen').style.display = 'none';
+  }, 3000);
+}
   
   function get_user() {
       const name = document.getElementById("create_name").value.trim();
@@ -1670,6 +1676,7 @@ function send(button) {
            console.log("running");
            navigation = "home";
            console.log("running");
+           splash();
            navigate();
            alert("Welcome to Autumn's Ambrosia");
        }
@@ -1678,17 +1685,12 @@ function send(button) {
        }
       } else {
         navigation = "create";
+        splash();
         navigate();
       }
     }
    }
 
-function splash() {
-   // Wait 3 seconds, then hide splash screen
-  setTimeout(() => {
-    document.querySelector('.splash-screen').style.display = 'none';
-  }, 3000);
-}
 
 //Sign in
 function check_if_got_user() {
