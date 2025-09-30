@@ -1647,12 +1647,7 @@ function send(button) {
     });
   }
 
-function splash() {
-   // Wait 3 seconds, then hide splash screen
-  setTimeout(() => {
-    document.querySelector('.splash-screen').style.display = 'none';
-  }, 3000);
-}
+
   
   function get_user() {
       const name = document.getElementById("create_name").value.trim();
@@ -1674,7 +1669,6 @@ function splash() {
           try {
            document.getElementById("welcome").innerHTML = `Hello ${user}, what would you like to order today?`;
            console.log("running");
-           splash();
            navigation = "home";
            console.log("running");
            navigate();
@@ -1684,7 +1678,6 @@ function splash() {
            alert(`Error: ${err.message}`);
        }
       } else {
-        splash();
         navigation = "create";
         navigate();
       }
@@ -1698,7 +1691,6 @@ function check_if_got_user() {
   console.log(user);
   if (user != null) {
      try {
-      splash();
       document.getElementById("welcome").innerHTML = `Hello ${user}, what would you like to order today?`;
       console.log("running");
       navigation = "home";
@@ -1709,13 +1701,10 @@ function check_if_got_user() {
       alert(`Error: ${err.message}`);
      }
   } else {
-    splash();
     navigation = "create";
     navigate();
   }
 }
-
-
 
 
  //delete account
@@ -1725,11 +1714,24 @@ function check_if_got_user() {
   navigate();
  }
 
- function first_to_run() {
-    check_if_got_user();
-    console.log("Run");
-    drinks();
-    initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` }).then(SQL => {
+ async function first_to_run() {
+  try {
+    // Show splash screen until all loading is done
+    document.querySelector('.splash-screen').style.display = 'block';
+
+    // Step 1: Check user
+    const user = localStorage.getItem("user");
+    const welcomeElement = document.getElementById("welcome");
+    if (user) {
+      welcomeElement.innerHTML = `Hello ${user}, what would you like to order today?`;
+      navigation = "home";
+    } else {
+      navigation = "create";
+    }
+
+    // Step 2: Initialize database
+    const SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` });
+
     if (localStorage.getItem("saved_database")) {
       const savedDatabase = localStorage.getItem("saved_database");
       const uInt8Array = new Uint8Array(JSON.parse(savedDatabase));
@@ -1738,20 +1740,32 @@ function check_if_got_user() {
       db = new SQL.Database();
       db.run("CREATE TABLE IF NOT EXISTS cart (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, quantity INTEGER, total_price INTEGER, topping TEXT, url TEXT);");
     }
-    });
-    console.log("Run");
 
-    topping_info().then(data => {
-     topping_price = data;
-     console.log(topping_price);
-    });
+    // Step 3: Load topping info
+    topping_price = await topping_info();
+    console.log("Topping info loaded:", topping_price);
 
-    drinks().then(data => {
-      product_list = data;
-      console.log(product_list);
-      render_images();
-    });
- }
+    // Step 4: Load product list
+    product_list = await drinks();
+    console.log("Product list loaded:", product_list);
+
+    // Step 5: Render images
+    render_images();
+
+    // Step 6: Hide splash screen and navigate
+    document.querySelector('.splash-screen').style.display = 'none';
+    navigate();
+
+    // Optional greeting
+    if (user) {
+      alert("Welcome to Autumn's Ambrosia");
+    }
+  } catch (err) {
+    console.error("Initialization error:", err);
+    alert("An error occurred during startup. Please refresh the page.");
+  }
+}
+
  
  let slideIndex = 1;
 showSlides(slideIndex);
