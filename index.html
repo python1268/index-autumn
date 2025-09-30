@@ -35,6 +35,34 @@
     #add_to_cart_page {
        display: none;
     }
+
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.splash-screen img {
+  max-width: 300px;
+  width: 80%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.loading-text {
+ font-size: 1.5em;
+ color: #555;
+ animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+ 0%, 100% { opacity: 1; }
+ 50% { opacity: 0.3; }
+}
     
    /* Homepage */
     #hamburger_radio:checked ~ #hamburger_container #hamburger_group {
@@ -898,6 +926,11 @@ img {vertical-align: middle;}
 </head>
 <body>
 
+<div class="splash-screen">
+  <img src="https://i.ibb.co/FLRCtZq5/d8a59c32-8b55-4b55-8b58-90c4b12ad723.jpg" alt="Splash Image">
+  <h3 class="loading-text">Loading...</h3>
+</div>
+
   <fieldset id="create_screen">
         <h1>We would like to know about you.</h1>
         <div class="container">
@@ -1649,7 +1682,13 @@ function send(button) {
       }
     }
    }
- 
+
+function splash() {
+   // Wait 3 seconds, then hide splash screen
+  setTimeout(() => {
+    document.querySelector('.splash-screen').style.display = 'none';
+  }, 3000);
+}
 
 //Sign in
 function check_if_got_user() {
@@ -1661,6 +1700,7 @@ function check_if_got_user() {
       console.log("running");
       navigation = "home";
       console.log("running");
+      splash();
       navigate();
      }
      catch (err) {
@@ -1668,9 +1708,11 @@ function check_if_got_user() {
      }
   } else {
     navigation = "create";
+    splash();
     navigate();
   }
 }
+
 
 
 
