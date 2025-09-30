@@ -1674,9 +1674,9 @@ function splash() {
           try {
            document.getElementById("welcome").innerHTML = `Hello ${user}, what would you like to order today?`;
            console.log("running");
+           splash();
            navigation = "home";
            console.log("running");
-           splash();
            navigate();
            alert("Welcome to Autumn's Ambrosia");
        }
@@ -1684,8 +1684,8 @@ function splash() {
            alert(`Error: ${err.message}`);
        }
       } else {
-        navigation = "create";
         splash();
+        navigation = "create";
         navigate();
       }
     }
@@ -1698,19 +1698,19 @@ function check_if_got_user() {
   console.log(user);
   if (user != null) {
      try {
+      splash();
       document.getElementById("welcome").innerHTML = `Hello ${user}, what would you like to order today?`;
       console.log("running");
       navigation = "home";
       console.log("running");
-      splash();
       navigate();
      }
      catch (err) {
       alert(`Error: ${err.message}`);
      }
   } else {
-    navigation = "create";
     splash();
+    navigation = "create";
     navigate();
   }
 }
