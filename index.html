@@ -1421,14 +1421,12 @@ function drinks() {
   //AIzaSyBJxaglYf_C8eg2RitXnRjaekXHAR-TEV8 (users2)
   // AIzaSyDZTgkFS2btgRW_gudCuQZ6KKgCAe86OAo (users1)
   // const apiKey = ["AIzaSyDWNrk5Y3tlT7g1xAs157Pd77-oLMmOw0M","AIzaSyDovSVgpRkJ3od511umMilPQbbT5wM3dcE"];
-  const apiKey = ["AIzaSyDZTgkFS2btgRW_gudCuQZ6KKgCAe86OAo", "AIzaSyBJxaglYf_C8eg2RitXnRjaekXHAR-TEV8"]
+  const apiKey = ["AIzaSyDZTgkFS2btgRW_gudCuQZ6KKgCAe86OAo", "AIzaSyBJxaglYf_C8eg2RitXnRjaekXHAR-TEV8", "AIzaSyB-9g4DlbyAqxRSUjbfI3-WkQ_jBYuLj-A"];
   const spreadsheetId = "1u6lP1SoOr6w_ON2BFtsCFc76aDzlnE9q8zX8y2K7qu4";
   const range = "Products"; // Change this range as needed
 
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey[Math.floor(Math.random() * apiKey.length)]}`;
 
-  console.log(url);
-  console.log("Running drinks");
   document.getElementById("drink_menu").innerHTML = "";
   console.log("Running drinks");
   return fetch(url)
@@ -1455,7 +1453,7 @@ function render_images() {
 
 // Topping
 function topping_info() {
-  const apiKey = ["AIzaSyBl_r5DKjdD3psXKxUOPA4XNhtxqsyrgT0", "AIzaSyDtYnCFqXieMKOaVo7OhN6b8W7esVdknJY"]
+  const apiKey = ["AIzaSyBl_r5DKjdD3psXKxUOPA4XNhtxqsyrgT0", "AIzaSyDtYnCFqXieMKOaVo7OhN6b8W7esVdknJY", "AIzaSyDhYrQ2nFo0FHPMaT1aCsjdB-xuke2ngaA"]
   const spreadsheetId = "1u6lP1SoOr6w_ON2BFtsCFc76aDzlnE9q8zX8y2K7qu4";
   const range = "Topping";
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey[Math.floor(Math.random() * apiKey.length)]}`;
