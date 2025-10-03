@@ -933,8 +933,8 @@ img {vertical-align: middle;}
   <fieldset id="create_screen">
         <h1>We would like to know about you.</h1>
         <div class="container">
-         <h4 class="create_h4">Name (Full name):</h4>
-         <input type="text" class="create_input" id="create_name" required>
+         <h4 class="create_h4">Name (Full real name):</h4>
+         <input type="text" placeholder="your full real name" class="create_input" id="create_name" maxlength="20" required />
         </div>
         <button id="create_button" type="button" onclick="get_user();">Log in</button>
   </fieldset>
@@ -986,6 +986,8 @@ img {vertical-align: middle;}
     <h2 id="welcome">Hello, what would you like to search today?</h2>
     <br>
     <h3><strong>Preorder prices are now cheaper RM1 than purchasing on 15 October !!!</strong></h3>
+    <br>
+    <p>This website is created by: Jay Sheng :)</p>
     <button id="find_food2" onclick="navigation='order';navigate()">Order Now</button>
     <button id="sign_out_button" onclick="delete_acc();">Sign out</button>
   </div>
@@ -1003,6 +1005,8 @@ img {vertical-align: middle;}
   <h1 class="order_type_title">Drinks</h1>
   <div class="order_img_container" id="drink_menu">
   </div>
+  <br>
+  <h4 style="margin-left:40px;">Scroll to the right to view more products.</h4>
   <hr>
 </div>
 
@@ -1041,18 +1045,23 @@ img {vertical-align: middle;}
 <div class="slideshow-container">
 
 <div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
+  <div class="numbertext">1 / 4</div>
+  <img src="https://ik.imagekit.io/jasonooi/IMG_1964.jpeg?updatedAt=1759459983504" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 4</div>
   <img src="https://ik.imagekit.io/mtezxb4dx/IMG_1954.jpeg?updatedAt=1759220363827" style="width:100%">
 </div>
 
 <div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
+  <div class="numbertext">3 / 4</div>
   <img src="https://ik.imagekit.io/mtezxb4dx/IMG_0769.jpeg?updatedAt=1759201442325" style="width:100%">
   <div class="text" style="color:black;">Meet our mascot</div>
 </div>
 
 <div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
+  <div class="numbertext">4 / 4</div>
   <img src="https://images.immediate.co.uk/production/volatile/sites/30/2023/10/GF01115BackPagePSOCocktailspreview-829355e.jpg?quality=90&resize=708,643" style="width:100%">
   <div class="text">Order at here now</div>
 </div>
@@ -1067,6 +1076,7 @@ img {vertical-align: middle;}
   <span class="dot" onclick="currentSlide(1)"></span> 
   <span class="dot" onclick="currentSlide(2)"></span> 
   <span class="dot" onclick="currentSlide(3)"></span> 
+  <span class="dot" onclick="currentSlide(4)"></span> 
 </div>
 <br>
 <hr>
@@ -1084,15 +1094,15 @@ img {vertical-align: middle;}
        <p id="here_are">Here are some of our famous drinks.</p>
    </div>
         <div class="each_person">
-            <img src="https://i.ibb.co/MyQ7Sbbd/img1.png" class="image_about" alt="image" onerror="this.onerror=null; this.src='https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%204.jpeg?updatedAt=1754308163899';">
+            <img src="https://i.ibb.co/MyQ7Sbbd/img1.png" class="image_about" alt="image">
             <h3 class="name_each_person">Lychee Sensation</h3>
         </div>
          <div class="each_person">
-            <img src="https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%204.jpeg?updatedAt=1754308163899" class="image_about" alt="image" onerror="this.onerror=null; this.src='https://ik.imagekit.io/jasonooi/Add%20a%20heading.zip%20-%204.jpeg?updatedAt=1754308163899';">
+            <img src="https://i.ibb.co/dJH0Q1fV/Add-a-heading-zip-4.png" class="image_about" alt="image">
             <h3 class="name_each_person">Choko Deez Nuts</h3>
         </div>
         <div class="each_person">
-            <img src="https://ik.imagekit.io/jasonooi/Add%20a%20heading.jpeg?updatedAt=1754308163956" class="image_about" alt="image" onerror="this.onerror=null; this.src='https://ik.imagekit.io/jasonooi/Add%20a%20heading.jpeg?updatedAt=1754308163956';">
+            <img src="https://i.ibb.co/LzBgMdZF/Add-a-heading-zip-3.png" class="image_about" alt="image">
             <h3 class="name_each_person">Spooky Choc</h3>
         </div>
         </div>
@@ -1294,7 +1304,7 @@ function add_one(id) {
       </div>
          `
        });
-       document.getElementById("cart_inner").innerHTML += `<button id="place_order" onclick="send(this)">Place order</button>`;
+      document.getElementById("cart_inner").innerHTML += `<h3>Please do note that you must pick up your order on 15 October at Taylor Puchong (our booth located near the poolside) as we will not accept any refund requests.</h3><br><h4>You can see more details on our recent posts. Thank you.</h4><br><button id="place_order" onclick="send(this)">Place order</button>`;
      }
 
 
@@ -1416,11 +1426,6 @@ function add_to_cart() {
 
   // Drinks
 function drinks() {
-  // AIzaSyDtYnCFqXieMKOaVo7OhN6b8W7esVdknJY (users4)
-  // AIzaSyBl_r5DKjdD3psXKxUOPA4XNhtxqsyrgT0 (users3)
-  //AIzaSyBJxaglYf_C8eg2RitXnRjaekXHAR-TEV8 (users2)
-  // AIzaSyDZTgkFS2btgRW_gudCuQZ6KKgCAe86OAo (users1)
-  // const apiKey = ["AIzaSyDWNrk5Y3tlT7g1xAs157Pd77-oLMmOw0M","AIzaSyDovSVgpRkJ3od511umMilPQbbT5wM3dcE"];
   const apiKey = ["AIzaSyDZTgkFS2btgRW_gudCuQZ6KKgCAe86OAo", "AIzaSyBJxaglYf_C8eg2RitXnRjaekXHAR-TEV8", "AIzaSyB-9g4DlbyAqxRSUjbfI3-WkQ_jBYuLj-A"];
   const spreadsheetId = "1u6lP1SoOr6w_ON2BFtsCFc76aDzlnE9q8zX8y2K7qu4";
   const range = "Products"; // Change this range as needed
@@ -1443,10 +1448,8 @@ function render_images() {
       var price = row[1];
       var topping = JSON.stringify(row[2].trim().split(", ")).replace(/"/g, "'");
       var image = row[3];
-      var back_up_image = row[4];
-      console.log({ name, price, topping, image })
-      console.log(topping)
-      document.getElementById("drink_menu").innerHTML += `<img class="order_images" src="${image}" onclick="navigation='order_chosen';navigate();add_cart('${name}','${price}','${image}', ${topping})" onerror="this.onerror=null; this.src='${back_up_image}';">`;
+      var back_up = row[4];
+      document.getElementById("drink_menu").innerHTML += `<img class="order_images" src="${image}" onclick="navigation='order_chosen';navigate();add_cart('${name}','${price}','${image}', ${topping})" onerror="this.onerror=null; this.src=${back_up};">`;
     }
 }
 
@@ -1653,6 +1656,8 @@ function check_if_got_user() {
   localStorage.removeItem("user");
   navigation = "create";
   navigate();
+  db.run('DELETE FROM cart');
+  save_cartdata();
  }
 
  async function first_to_run() {
